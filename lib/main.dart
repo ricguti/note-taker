@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_taker/note.dart';
 
 void main() {
   runApp(MyApp());
@@ -47,7 +48,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: null,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Note()),
+          );
+        },
         tooltip: 'Create Note',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
