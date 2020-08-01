@@ -6,6 +6,16 @@ class Note extends StatefulWidget {
 }
 
 class _NoteState extends State<Note> {
+  final titleController = TextEditingController();
+  final bodyController = TextEditingController();
+
+  @override
+  void dispose() {
+    titleController.dispose();
+    bodyController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,6 +26,18 @@ class _NoteState extends State<Note> {
             tooltip: 'Save Note',
             onPressed: () {
               // save the note
+              return showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    // Retrieve the text the user has entered by using the
+                    // TextEditingController.
+                    content: Text(titleController.text +
+                        " " +
+                        bodyController.text),
+                  );
+                },
+              );
             },
           )
         ],
@@ -30,6 +52,7 @@ class _NoteState extends State<Note> {
                 decoration: InputDecoration(
                   labelText: 'Note Title',
                 ),
+                controller: titleController,
               ),
             ),
             Expanded(
@@ -46,6 +69,7 @@ class _NoteState extends State<Note> {
                   errorBorder: InputBorder.none,
                   disabledBorder: InputBorder.none,
                 ),
+                controller: bodyController,
               ),
             )),
           ],
