@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Note extends StatefulWidget {
+class NoteView extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _NoteState();
+  State<StatefulWidget> createState() => _NoteViewState();
+
+  void setTitle(String text) {}
 }
 
-class _NoteState extends State<Note> {
+class _NoteViewState extends State<NoteView> {
   final titleController = TextEditingController();
   final bodyController = TextEditingController();
 

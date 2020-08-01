@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:note_taker/note.dart';
+import 'package:note_taker/note_view.dart';
 
 void main() {
   runApp(MyApp());
@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Note()),
+            MaterialPageRoute(builder: (context) => NoteView()),
           );
         },
         tooltip: 'Create Note',
