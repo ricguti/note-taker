@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:note_taker/model/note_model.dart';
 
 class NoteView extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _NoteViewState();
-
   void setTitle(String text) {}
 }
 
@@ -28,18 +28,8 @@ class _NoteViewState extends State<NoteView> {
             tooltip: 'Save Note',
             onPressed: () {
               // save the note
-              return showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    // Retrieve the text the user has entered by using the
-                    // TextEditingController.
-                    content: Text(titleController.text +
-                        " " +
-                        bodyController.text),
-                  );
-                },
-              );
+              notes.add(new Note(titleController.text, bodyController.text));
+              Navigator.pop(context);
             },
           )
         ],
