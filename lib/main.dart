@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:note_taker/components/card_component.dart';
+import 'package:note_taker/model/note_model.dart';
 import 'package:note_taker/note_view.dart';
 
 void main() {
@@ -38,14 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Add a note to display it here',
-            ),
-          ],
-        ),
+        child: ListView(children: displayNotes()),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -58,5 +53,24 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  List<Widget> displayNotes() {
+    List<CardComponent> notesToDisplay = List<CardComponent>();
+    if (notes.isEmpty) {
+      return [
+        Container(
+          padding: EdgeInsets.all(20.0),
+            child: Text(
+          'Your notes will be displayed here',
+        ))
+      ];
+    }
+
+    for (int i = 0; i < notes.length; i++) {
+      notesToDisplay
+          .add(CardComponent(title: notes[i].title, body: notes[i].body));
+    }
+    return notesToDisplay;
   }
 }
