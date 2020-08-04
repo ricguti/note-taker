@@ -25,32 +25,3 @@ class CardComponent extends StatelessWidget {
     );
   }
 }
-
-/*
-
-Text(title,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0))
-
-class _CardComponentState extends State<CardComponent> {
-  @override
-  Widget build(BuildContext context) {
-    String text = 'hola';
-    return Container(
-        padding: EdgeInsets.all(10.0),
-        child: Card(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              const ListTile(
-                leading: Icon(Icons.album),
-                title: Text(''),
-                subtitle: Text(''),
-              ),
-            ],
-          ),
-        ));
-  }
-}
-
-
- */
