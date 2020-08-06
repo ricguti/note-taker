@@ -41,13 +41,15 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: ListView(children: displayNotes(widget.notes)),
+        child: ListView(
+            children: displayNotes(widget.notes),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => NoteView(notes: widget.notes,)),
+            MaterialPageRoute(builder: (context) => NoteView(notes: widget.notes, index: -1,)),
           );
         },
         tooltip: 'Create Note',
@@ -57,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   List<Widget> displayNotes(List<Note> notes) {
-    List<CardComponent> notesToDisplay = List<CardComponent>();
+    List<Widget> notesToDisplay = List<Widget>();
     if (notes.isEmpty) {
       return [
         Container(
@@ -69,8 +71,17 @@ class _MyHomePageState extends State<MyHomePage> {
     }
 
     for (int i = 0; i < notes.length; i++) {
-      notesToDisplay
-          .add(CardComponent(title: notes[i].title, body: notes[i].body));
+      notesToDisplay.add(
+        GestureDetector(
+          child: CardComponent(title: notes[i].title, body: notes[i].body),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => NoteView(notes: widget.notes, index: i,)),
+            );
+          },
+        )
+      );
     }
     return notesToDisplay;
   }

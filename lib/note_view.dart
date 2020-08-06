@@ -3,9 +3,10 @@ import 'package:note_taker/main.dart';
 import 'package:note_taker/model/note_model.dart';
 
 class NoteView extends StatefulWidget {
-  NoteView({Key key, this.notes}) : super(key: key);
+  NoteView({Key key, this.notes, this.index}) : super(key: key);
 
   final List<Note> notes;
+  final int index;
 
   @override
   State<StatefulWidget> createState() => _NoteViewState();
@@ -25,6 +26,10 @@ class _NoteViewState extends State<NoteView> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.index >= 0) {
+      titleController.text = widget.notes[widget.index].title;
+      bodyController.text = widget.notes[widget.index].body;
+    }
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
@@ -33,10 +38,16 @@ class _NoteViewState extends State<NoteView> {
             tooltip: 'Save Note',
             onPressed: () {
               // save the note
-              widget.notes.add(new Note(titleController.text, bodyController.text));
+              widget.index >= 0
+                  ? widget.notes[widget.index] =
+                      new Note(titleController.text, bodyController.text)
+                  : widget.notes
+                      .add(new Note(titleController.text, bodyController.text));
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => MyHomePage(title: 'Note Taker', notes: notes)),
+                MaterialPageRoute(
+                    builder: (context) =>
+                        MyHomePage(title: 'Note Taker', notes: notes)),
               );
             },
           ),
