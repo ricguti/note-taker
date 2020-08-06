@@ -56,6 +56,15 @@ class _NoteViewState extends State<NoteView> {
             tooltip: 'Delete Note',
             onPressed: () {
               // delete the note
+              if(widget.index >= 0) {
+                widget.notes.removeAt(widget.index);
+              }
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        MyHomePage(title: 'Note Taker', notes: notes)),
+              );
             },
           )
         ],
