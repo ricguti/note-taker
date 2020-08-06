@@ -39,6 +39,13 @@ class _NoteViewState extends State<NoteView> {
                 MaterialPageRoute(builder: (context) => MyHomePage(title: 'Note Taker', notes: notes)),
               );
             },
+          ),
+          IconButton(
+            icon: const Icon(Icons.delete),
+            tooltip: 'Delete Note',
+            onPressed: () {
+              // delete the note
+            },
           )
         ],
       ),
