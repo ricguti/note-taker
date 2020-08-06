@@ -18,15 +18,16 @@ class MyApp extends StatelessWidget {
         // the app on.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Note Taker'),
+      home: MyHomePage(title: 'Note Taker', notes: notes),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key key, this.title, this.notes}) : super(key: key);
 
   final String title;
+  final List<Note> notes;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -40,13 +41,13 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: ListView(children: displayNotes()),
+        child: ListView(children: displayNotes(widget.notes)),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => NoteView()),
+            MaterialPageRoute(builder: (context) => NoteView(notes: widget.notes,)),
           );
         },
         tooltip: 'Create Note',
@@ -55,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  List<Widget> displayNotes() {
+  List<Widget> displayNotes(List<Note> notes) {
     List<CardComponent> notesToDisplay = List<CardComponent>();
     if (notes.isEmpty) {
       return [

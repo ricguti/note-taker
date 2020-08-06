@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:note_taker/main.dart';
 import 'package:note_taker/model/note_model.dart';
 
 class NoteView extends StatefulWidget {
+  NoteView({Key key, this.notes}) : super(key: key);
+
+  final List<Note> notes;
+
   @override
   State<StatefulWidget> createState() => _NoteViewState();
   void setTitle(String text) {}
@@ -28,8 +33,11 @@ class _NoteViewState extends State<NoteView> {
             tooltip: 'Save Note',
             onPressed: () {
               // save the note
-              notes.add(new Note(titleController.text, bodyController.text));
-              Navigator.pop(context);
+              widget.notes.add(new Note(titleController.text, bodyController.text));
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MyHomePage(title: 'Note Taker', notes: notes)),
+              );
             },
           )
         ],
