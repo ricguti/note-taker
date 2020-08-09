@@ -13,8 +13,6 @@ class MyApp extends StatelessWidget {
       title: 'Note Taker',
       theme: ThemeData(
         primarySwatch: Colors.amber,
-        // This makes the visual density adapt to the platform that you run
-        // the app on.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MyHomePage(title: 'Note Taker', notes: notes),

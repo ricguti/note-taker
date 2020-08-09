@@ -37,7 +37,6 @@ class _NoteViewState extends State<NoteView> {
             icon: const Icon(Icons.save),
             tooltip: 'Save Note',
             onPressed: () {
-              // save the note
               widget.index >= 0
                   ? widget.notes[widget.index] =
                       new Note(titleController.text, bodyController.text)
@@ -55,7 +54,6 @@ class _NoteViewState extends State<NoteView> {
             icon: const Icon(Icons.delete),
             tooltip: 'Delete Note',
             onPressed: () {
-              // delete the note
               if(widget.index >= 0) {
                 widget.notes.removeAt(widget.index);
               }
