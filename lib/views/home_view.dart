@@ -22,48 +22,41 @@ class _HomeViewState extends State<HomeView> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: ListView(
-          children: displayNotes(widget.notes),
-        ),
+        child: notes.isEmpty
+            ? Text('Your notes will be displayed here')
+            : ListView.builder(
+                itemCount: widget.notes.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return GestureDetector(
+                    child: CardComponent(
+                        title: notes[index].title, body: notes[index].body),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => NoteView(
+                                  notes: widget.notes,
+                                  index: index,
+                                )),
+                      );
+                    },
+                  );
+                }),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => NoteView(notes: widget.notes, index: -1,)),
+            MaterialPageRoute(
+                builder: (context) => NoteView(
+                      notes: widget.notes,
+                      index: -1,
+                    )),
           );
         },
         tooltip: 'Create Note',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
-  }
-
-  List<Widget> displayNotes(List<Note> notes) {
-    List<Widget> notesToDisplay = List<Widget>();
-    if (notes.isEmpty) {
-      return [
-        Container(
-            padding: EdgeInsets.all(20.0),
-            child: Text(
-              'Your notes will be displayed here',
-            ))
-      ];
-    }
-
-    for (int i = 0; i < notes.length; i++) {
-      notesToDisplay.add(
-          GestureDetector(
-            child: CardComponent(title: notes[i].title, body: notes[i].body),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => NoteView(notes: widget.notes, index: i,)),
-              );
-            },
-          )
-      );
-    }
-    return notesToDisplay;
   }
 }
