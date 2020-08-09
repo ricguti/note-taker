@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:note_taker/main.dart';
-import 'package:note_taker/model/note_model.dart';
+import 'package:note_taker/models/note_model.dart';
 
 class NoteView extends StatefulWidget {
   NoteView({Key key, this.notes, this.index}) : super(key: key);

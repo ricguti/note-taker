@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:note_taker/components/card_component.dart';
-import 'package:note_taker/model/note_model.dart';
+import 'package:note_taker/models/note_model.dart';
 import 'package:note_taker/note_view.dart';
 
 void main() {
