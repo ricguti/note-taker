@@ -4,17 +4,17 @@ import 'package:note_taker/models/note_model.dart';
 
 import 'note_view.dart';
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title, this.notes}) : super(key: key);
+class HomeView extends StatefulWidget {
+  HomeView({Key key, this.title, this.notes}) : super(key: key);
 
   final String title;
   final List<Note> notes;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _HomeViewState createState() => _HomeViewState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:note_taker/models/note_model.dart';
 
-import 'home_page.dart';
+import 'home_view.dart';
 
 class NoteView extends StatefulWidget {
   NoteView({Key key, this.notes, this.index}) : super(key: key);
@@ -46,7 +46,7 @@ class _NoteViewState extends State<NoteView> {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        MyHomePage(title: 'Note Taker', notes: notes)),
+                        HomeView(title: 'Note Taker', notes: notes)),
               );
             },
           ),
@@ -61,7 +61,7 @@ class _NoteViewState extends State<NoteView> {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        MyHomePage(title: 'Note Taker', notes: notes)),
+                        HomeView(title: 'Note Taker', notes: notes)),
               );
             },
           )
