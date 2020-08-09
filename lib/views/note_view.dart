@@ -32,74 +32,86 @@ class _NoteViewState extends State<NoteView> {
     }
     return Scaffold(
       appBar: AppBar(
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.save),
-            tooltip: 'Save Note',
-            onPressed: () {
-              widget.index >= 0
-                  ? widget.notes[widget.index] =
-                      new Note(titleController.text, bodyController.text)
-                  : widget.notes
-                      .add(new Note(titleController.text, bodyController.text));
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        HomeView(title: 'Note Taker', notes: notes)),
-              );
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.delete),
-            tooltip: 'Delete Note',
-            onPressed: () {
-              if(widget.index >= 0) {
-                widget.notes.removeAt(widget.index);
-              }
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        HomeView(title: 'Note Taker', notes: notes)),
-              );
-            },
-          )
-        ],
+        actions: <Widget>[_saveAction(), _deleteAction()],
       ),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Container(
-              padding: EdgeInsets.all(10.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  labelText: 'Note Title',
-                ),
-                controller: titleController,
-              ),
+            _textFieldContainer(
+              _titleTextField('Note Title', titleController),
             ),
             Expanded(
-                child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              child: TextField(
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                decoration: InputDecoration(
-                  labelText: 'Note Body',
-                  border: InputBorder.none,
-                  focusedBorder: InputBorder.none,
-                  enabledBorder: InputBorder.none,
-                  errorBorder: InputBorder.none,
-                  disabledBorder: InputBorder.none,
-                ),
-                controller: bodyController,
-              ),
-            )),
+                child: _textFieldContainer(
+                    _bodyTextField('Note Body', bodyController))),
           ],
         ),
       ),
+    );
+  }
+
+  IconButton _saveAction() {
+    return IconButton(
+      icon: const Icon(Icons.save),
+      tooltip: 'Save Note',
+      onPressed: () {
+        widget.index >= 0
+            ? widget.notes[widget.index] =
+                new Note(titleController.text, bodyController.text)
+            : widget.notes
+                .add(new Note(titleController.text, bodyController.text));
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  HomeView(title: 'Note Taker', notes: notes)),
+        );
+      },
+    );
+  }
+
+  IconButton _deleteAction() {
+    return IconButton(
+      icon: const Icon(Icons.delete),
+      tooltip: 'Delete Note',
+      onPressed: () {
+        if (widget.index >= 0) {
+          widget.notes.removeAt(widget.index);
+        }
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  HomeView(title: 'Note Taker', notes: notes)),
+        );
+      },
+    );
+  }
+
+  Container _textFieldContainer(TextField textField) {
+    return Container(
+        padding: EdgeInsets.symmetric(horizontal: 10.0), child: textField);
+  }
+
+  TextField _titleTextField(
+      String labelText, TextEditingController controller) {
+    return TextField(
+      decoration: InputDecoration(
+        labelText: labelText,
+      ),
+      controller: controller,
+    );
+  }
+
+  TextField _bodyTextField(String labelText, TextEditingController controller) {
+    return TextField(
+      keyboardType: TextInputType.multiline,
+      maxLines: null,
+      decoration: InputDecoration(
+        labelText: labelText,
+        border: InputBorder.none,
+      ),
+      controller: controller,
     );
   }
 }
