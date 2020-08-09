@@ -22,41 +22,39 @@ class _HomeViewState extends State<HomeView> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: notes.isEmpty
+        child: widget.notes.isEmpty
             ? Text('Your notes will be displayed here')
             : ListView.builder(
                 itemCount: widget.notes.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                    child: CardComponent(
-                        title: notes[index].title, body: notes[index].body),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => NoteView(
-                                  notes: widget.notes,
-                                  index: index,
-                                )),
-                      );
-                    },
-                  );
+                  return _tapableCard(widget.notes[index].title,
+                      widget.notes[index].body, _navigateToNoteView(index));
                 }),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => NoteView(
-                      notes: widget.notes,
-                      index: -1,
-                    )),
-          );
-        },
+        onPressed: _navigateToNoteView(-1),
         tooltip: 'Create Note',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  GestureDetector _tapableCard(
+      String cardTitle, String cardBody, GestureTapCallback _tap) {
+    return GestureDetector(
+      child: CardComponent(title: cardTitle, body: cardBody),
+      onTap: _tap,
+    );
+  }
+
+  GestureTapCallback _navigateToNoteView(int index) {
+    return () => Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => NoteView(
+                    notes: widget.notes,
+                    index: index,
+                  )),
+        );
   }
 }
