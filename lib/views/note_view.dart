@@ -11,7 +11,6 @@ class NoteView extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => _NoteViewState();
-  void setTitle(String text) {}
 }
 
 class _NoteViewState extends State<NoteView> {
