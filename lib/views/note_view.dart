@@ -25,7 +25,7 @@ class _NoteViewState extends State<NoteView> {
   @override
   Widget build(BuildContext context) {
     NotesModel notes = Provider.of<NotesModel>(context);
-    if (widget.index >= 0 && notes.length() > 0) {
+    if (widget.index >= 0 && widget.index < notes.length()) {
       Note note = notes.getNote(widget.index);
       titleController.text = note.title;
       bodyController.text = note.body;
