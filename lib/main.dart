@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:note_taker/models/note_model.dart';
 import 'package:note_taker/views/home_view.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (context) => NotesModel(),
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -15,7 +19,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.amber,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomeView(title: 'Note Taker', notes: notes),
+      home: HomeView(title: 'Note Taker'),
     );
   }
 }

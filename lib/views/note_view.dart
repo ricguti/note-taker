@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:note_taker/models/note_model.dart';
-
-import 'home_view.dart';
+import 'package:provider/provider.dart';
 
 class NoteView extends StatefulWidget {
-  NoteView({Key key, this.notes, this.index}) : super(key: key);
+  NoteView({Key key, this.index}) : super(key: key);
 
-  final List<Note> notes;
   final int index;
 
   @override
@@ -26,13 +24,15 @@ class _NoteViewState extends State<NoteView> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.index >= 0) {
-      titleController.text = widget.notes[widget.index].title;
-      bodyController.text = widget.notes[widget.index].body;
+    NotesModel notes = Provider.of<NotesModel>(context);
+    if (widget.index >= 0 && widget.index < notes.length()) {
+      Note note = notes.getNote(widget.index);
+      titleController.text = note.title;
+      bodyController.text = note.body;
     }
     return Scaffold(
       appBar: AppBar(
-        actions: <Widget>[_saveAction(), _deleteAction()],
+        actions: <Widget>[_saveAction(notes), _deleteAction(notes)],
       ),
       body: SafeArea(
         child: Column(
@@ -50,40 +50,27 @@ class _NoteViewState extends State<NoteView> {
     );
   }
 
-  IconButton _saveAction() {
+  IconButton _saveAction(NotesModel notes) {
     return IconButton(
       icon: const Icon(Icons.save),
       tooltip: 'Save Note',
       onPressed: () {
-        widget.index >= 0
-            ? widget.notes[widget.index] =
-                new Note(titleController.text, bodyController.text)
-            : widget.notes
-                .add(new Note(titleController.text, bodyController.text));
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  HomeView(title: 'Note Taker', notes: notes)),
-        );
+        Note note = Note(titleController.text, bodyController.text);
+        widget.index == -1
+            ? notes.addNote(note)
+            : notes.editNote(widget.index, note);
+        Navigator.pop(context);
       },
     );
   }
 
-  IconButton _deleteAction() {
+  IconButton _deleteAction(NotesModel notes) {
     return IconButton(
       icon: const Icon(Icons.delete),
       tooltip: 'Delete Note',
       onPressed: () {
-        if (widget.index >= 0) {
-          widget.notes.removeAt(widget.index);
-        }
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  HomeView(title: 'Note Taker', notes: notes)),
-        );
+        notes.removeNote(widget.index);
+        Navigator.pop(context);
       },
     );
   }
