@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
 class Note {
-  String title;
-  String body;
+  String _title;
+  String _body;
 
-  Note(this.title, this.body);
+  Note(this._title, this._body);
+
+  String get body => _body;
+
+  String get title => _title;
 }
 
 class NotesModel extends ChangeNotifier {
@@ -28,6 +32,10 @@ class NotesModel extends ChangeNotifier {
       notifyListeners();
     }
   }
-}
 
-final List<Note> notes = [];
+  bool isEmpty() => _notes.isEmpty;
+
+  int length() => _notes.length;
+
+  Note getNote(int index) => _notes[index];
+}

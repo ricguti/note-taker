@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.amber,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomeView(title: 'Note Taker', notes: notes),
+      home: HomeView(title: 'Note Taker'),
     );
   }
 }
