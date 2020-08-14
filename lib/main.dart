@@ -14,12 +14,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Note Taker',
-      theme: ThemeData(
-        primarySwatch: Colors.amber,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: HomeView(title: 'Note Taker'),
-    );
+        title: 'Note Taker',
+        theme: ThemeData(
+          primarySwatch: Colors.amber,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: HomeView(title: 'Note Taker'),
+        debugShowCheckedModeBanner: false);
   }
 }
