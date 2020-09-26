@@ -15,6 +15,6 @@ screen or pressing the delete button will discard the changes.
 
 ![Adding Note](./images/adding-note.png)
 
-Finaly, this is how your notes will be displayed in the home screen.
+Finally, this is how your notes will be displayed in the home screen.
 
 ![Display Notes](./images/display-notes.png)
